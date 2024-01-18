@@ -42,7 +42,7 @@ const createThumbnailsTemplate = () => {
 
 }
 
-const changeActivePic = (target) => {
+const changeActivePic = (target, i) => {
 
     // rimuovo all'elemento che è visibile attualmente la classe
     imagesElements[currentIndexImage].classList.remove('active');
@@ -51,20 +51,31 @@ const changeActivePic = (target) => {
     
     switch (target) {
         case "next":
-            if (currentIndexImage === imagesElements.length - 1) {currentIndexImage = -1} 
+            if (currentIndexImage === imagesElements.length - 1) currentIndexImage = -1 
             currentIndexImage++;
             break;
         case "previous":
-            if (currentIndexImage === 0) {currentIndexImage = imagesElements.length} 
+            if (currentIndexImage === 0) currentIndexImage = imagesElements.length
             currentIndexImage--;
             break;
-
+        default:
+            currentIndexImage = target
+        
     }
     
     imagesElements[currentIndexImage].classList.add('active');
     thumbnailsElements[currentIndexImage].classList.add('colored');
 
 
+}
+
+//reagisco al click delle thumbnails
+
+const onThumbnailsClick = () => {
+
+    thumbnailsElements.forEach ((thumbnail, i) => {
+        currentIndexImage = thumbnail[i]
+    })
 }
 
 //! INIZIO DELLA PAGINA
@@ -100,3 +111,16 @@ leftButton.addEventListener('click', () => {
     changeActivePic('previous')
 
 });
+
+thumbnailsElements.forEach((thumbnail, i) => {
+
+    
+    thumbnail.addEventListener('click', () => {
+        
+        changeActivePic(i)
+        
+    })
+
+});
+
+//se l'index è superiore a 4 devo mostrare le thumbnails da 5 a 9

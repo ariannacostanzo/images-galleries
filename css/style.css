@@ -61,13 +61,14 @@ figcaption {
     font-size: 1.2rem;
 }
 
+
 .thumbnails-container {
     display: flex;
     align-items: center;
     width: 880px;
     margin: 3rem auto;
     gap: 10px;
-    overflow: hidden;
+    
 
 }
 
@@ -76,8 +77,13 @@ figcaption {
     height: 95px;
     border-radius: 10px;
     filter: grayscale(1);
+    cursor: pointer;
 }
 
 .colored {
     filter: grayscale(0);
+}
+
+.slide {
+    transform: translateX(-880px);
 }
