@@ -46,6 +46,7 @@ const changeActivePic = (target) => {
 
     // rimuovo all'elemento che è visibile attualmente la classe
     imagesElements[currentIndexImage].classList.remove('active');
+    thumbnailsElements[currentIndexImage].classList.remove('colored');
     //in base al caso aumento o diminuisco
     
     switch (target) {
@@ -60,7 +61,8 @@ const changeActivePic = (target) => {
 
     }
     
-    imagesElements[currentIndexImage].classList.add('active')
+    imagesElements[currentIndexImage].classList.add('active');
+    thumbnailsElements[currentIndexImage].classList.add('colored');
 
 
 }
@@ -75,15 +77,16 @@ imageContainer.innerHTML = createImageTemplate();
 thumbnailsContainer.innerHTML = createThumbnailsTemplate();
 
 
-
-//Ora raccolgo tutte le figures create
+//Ora raccolgo tutte le figures e thumbnails create
 const imagesElements = document.querySelectorAll('figure');
+const thumbnailsElements = document.querySelectorAll('.thumbnails');
 
 //Inizializzo una variabile d'appoggio
 let currentIndexImage = 0;
 
-//Alla prima di queste do la classe active in modo che possa vedersi
+//Alla prima di queste do la classe active e colored in modo che possa vedersi
 imagesElements[currentIndexImage].classList.add('active');
+thumbnailsElements[currentIndexImage].classList.add('colored');
 
 
 
