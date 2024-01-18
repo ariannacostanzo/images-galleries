@@ -39,7 +39,7 @@ figcaption {
 }
 
 .img-fluid {
-    max-width: 100%;
+    max-width: 880px;
     border-radius: 10px;
     object-fit: cover;
     height: 500px;

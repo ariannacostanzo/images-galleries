@@ -52,12 +52,9 @@ const videogames = [
         image: "the-witcher.jpg"
     },
     {
-        name: "Monster Hunter",
+        name: "Monster Hunter World",
         image: "monster-hunter.jpg"
     },
-    {
-        name: "Monster Hunter",
-        image: "monster-hunter.jpg"
-    },
+    
     
 ]
