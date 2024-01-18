@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.image-container {
+    width: 60%;
+    height: 500px;
+    margin: 5rem auto;
+}
+
+figure {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: none;
+}
+
+figcaption {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 2rem;
+    text-shadow: 0 0 3px black;
+    color: rgb(10, 10, 10);
+}
+
+.img-fluid {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.active {
+    display: block;
+}
