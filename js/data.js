@@ -51,10 +51,7 @@ const videogames = [
         name: "The Witcher 3",
         image: "the-witcher.jpg"
     },
-    {
-        name: "Monster Hunter World",
-        image: "monster-hunter.jpg"
-    },
+    
     
     
 ]

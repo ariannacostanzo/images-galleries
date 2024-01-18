@@ -47,9 +47,13 @@ imagesElements[currentIndexImage].classList.add('active');
 
 rightButton.addEventListener('click', () => {
     
+    // rimuovo all'elemento che è visibile attualmente la classe
     imagesElements[currentIndexImage].classList.remove('active');
+    //se l'immagine mostrata è l'ultima faccio diventare il currentIndex - 1 così aumenta e torna a 0
+    if (currentIndexImage === imagesElements.length - 1) {currentIndexImage = -1} 
     currentIndexImage++;
+    //visto che ho aumentato l'index di uno mostrerò la figure dopo
     imagesElements[currentIndexImage].classList.add('active')
-    
+
 
 })
