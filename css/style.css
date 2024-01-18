@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.925);
 }
 
 .wrapper {
@@ -59,4 +59,25 @@ figcaption {
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
+}
+
+.thumbnails-container {
+    display: flex;
+    align-items: center;
+    width: 880px;
+    margin: 3rem auto;
+    gap: 10px;
+    overflow: hidden;
+
+}
+
+.thumbnails {
+    flex-basis: calc(100% / 5);
+    height: 95px;
+    border-radius: 10px;
+    filter: grayscale(1);
+}
+
+.colored {
+    filter: grayscale(0);
 }

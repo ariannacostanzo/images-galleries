@@ -1,11 +1,11 @@
 const imageContainer = document.getElementById('image-container');
 const leftButton = document.getElementById('left-arrow');
 const rightButton = document.getElementById('right-arrow');
-
+const thumbnailsContainer = document.querySelector('.thumbnails-container')
 
 const logSomething = (something) =>  console.log(something);
 
-const createTemplate = () => {
+const createImageTemplate = () => {
 
     //creo il template con un reduce
     const gamesElements = videogames.reduce((result, videogame, i) => {
@@ -25,6 +25,22 @@ const createTemplate = () => {
     return gamesElements
 
 };
+
+const createThumbnailsTemplate = () => {
+    //creo il template con un reduce
+
+    const thumbnails= videogames.reduce((result, videogame) => {
+
+        const {name, image} = videogame;
+        
+        return result + `
+        <img src="/images/${image}" alt="${name}" class="thumbnails">`
+
+    }, '');
+
+    return thumbnails
+
+}
 
 const changeActivePic = (target) => {
 
@@ -53,7 +69,12 @@ const changeActivePic = (target) => {
 
 
 //appendo il template creato con la funzione alla pagina
-imageContainer.innerHTML = createTemplate();
+imageContainer.innerHTML = createImageTemplate();
+
+//appendo il template di thumbnails al container
+thumbnailsContainer.innerHTML = createThumbnailsTemplate();
+
+
 
 //Ora raccolgo tutte le figures create
 const imagesElements = document.querySelectorAll('figure');
