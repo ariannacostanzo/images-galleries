@@ -17,7 +17,7 @@ body {
     gap: 30px;
 }
 
-.image-container {
+#image-container {
     height: 500px;
 }
 
