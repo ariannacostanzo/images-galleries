@@ -57,3 +57,14 @@ rightButton.addEventListener('click', () => {
 
 
 })
+
+leftButton.addEventListener('click', () => {
+    // rimuovo all'elemento che è visibile attualmente la classe
+    imagesElements[currentIndexImage].classList.remove('active');
+    //se l'immagine mostrata è la prima faccio diventare il currentIndex come la lenght così diminuisce di 1 e mostra l'ultima
+    if (currentIndexImage === 0) {currentIndexImage = imagesElements.length} 
+    currentIndexImage--;
+    //visto che ho diminuito l'index di uno mostrerò la figure prima
+    imagesElements[currentIndexImage].classList.add('active')
+
+});
