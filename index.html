@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Carousel</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css' integrity='sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==' crossorigin='anonymous'/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     
+    <div class="wrapper">
 
-    <div class="image-container">
-        <figure class="active">
-            <figcaption>
-                Assassin's Creed
-            </figcaption>
-            <img src="images/assassins-creed.jpg" alt="" class="img-fluid">
-        </figure>
-        <figure class="">
-            <figcaption>
-                Assassin's Creed
-            </figcaption>
-            <img src="images/assassins-creed.jpg" alt="" class="img-fluid">
-        </figure>
+        
+        <div id="left-arrow" class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="image-container">
+            <figure class="active">
+                <figcaption>
+                    <h3>Assassin's Creed</h3>
+                </figcaption>
+                <img src="images/the-witcher.jpg" alt="" class="img-fluid">
+            </figure>
 
-
-
+            <figure class="">
+                <figcaption>
+                    Assassin's Creed
+                </figcaption>
+                <img src="images/assassins-creed.jpg" alt="" class="img-fluid">
+            </figure>
+            
+        </div>
+        <div id="right-arrow" class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        
     </div>
-
-
-
+        
+        
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
 </body>
