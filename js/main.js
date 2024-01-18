@@ -26,6 +26,29 @@ const createTemplate = () => {
 
 };
 
+const changeActivePic = (target) => {
+
+    // rimuovo all'elemento che è visibile attualmente la classe
+    imagesElements[currentIndexImage].classList.remove('active');
+    //in base al caso aumento o diminuisco
+    
+    switch (target) {
+        case "next":
+            if (currentIndexImage === imagesElements.length - 1) {currentIndexImage = -1} 
+            currentIndexImage++;
+            break;
+        case "previous":
+            if (currentIndexImage === 0) {currentIndexImage = imagesElements.length} 
+            currentIndexImage--;
+            break;
+
+    }
+    
+    imagesElements[currentIndexImage].classList.add('active')
+
+
+}
+
 //! INIZIO DELLA PAGINA
 
 
@@ -46,25 +69,10 @@ imagesElements[currentIndexImage].classList.add('active');
 //!EVENT LISTENERS
 
 rightButton.addEventListener('click', () => {
-    
-    // rimuovo all'elemento che è visibile attualmente la classe
-    imagesElements[currentIndexImage].classList.remove('active');
-    //se l'immagine mostrata è l'ultima faccio diventare il currentIndex - 1 così aumenta e torna a 0
-    if (currentIndexImage === imagesElements.length - 1) {currentIndexImage = -1} 
-    currentIndexImage++;
-    //visto che ho aumentato l'index di uno mostrerò la figure dopo
-    imagesElements[currentIndexImage].classList.add('active')
-
-
+    changeActivePic('next')
 })
 
 leftButton.addEventListener('click', () => {
-    // rimuovo all'elemento che è visibile attualmente la classe
-    imagesElements[currentIndexImage].classList.remove('active');
-    //se l'immagine mostrata è la prima faccio diventare il currentIndex come la lenght così diminuisce di 1 e mostra l'ultima
-    if (currentIndexImage === 0) {currentIndexImage = imagesElements.length} 
-    currentIndexImage--;
-    //visto che ho diminuito l'index di uno mostrerò la figure prima
-    imagesElements[currentIndexImage].classList.add('active')
+    changeActivePic('previous')
 
 });
