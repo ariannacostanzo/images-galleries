@@ -45,44 +45,42 @@ const createThumbnailsTemplate = () => {
 
 }
 
+// con questa funzione in base al currentIndexImage cambio la pagina di thumbnails mostrata
 const changeThumbnailsDisplayed = (index) => {
     let currentPage = 1;
-    const itemsPerPage = 5;
-    const startIndex = 0;
     const endIndex = 4;
-    // const startNewPage = startIndex + itemsPerPage;
-    // const endNewPage = endIndex +itemsPerPage
+    const firstGroup = 0;
+    const secondGroup = 5;
+    const thirdGroup = 10;
 
-    //se current index image è tra 0 e 4 current page è 1
-    if (index >= startIndex && index <= endIndex) {
+    //se current index image è tra 0 e 4 current page è 1 e così via
+    if (index >= firstGroup && index <= endIndex) {
         currentPage = 1;
-    }   else if (index <= 9 && index >= 5) {
+    }   else if (index >= secondGroup && index <= secondGroup+endIndex) {
         currentPage = 2;
-    }   else if (index >= 10 && index <= 14) {
+    }   else if (index >= thirdGroup && index <= thirdGroup+endIndex) {
         currentPage = 3;
     }
 
-    //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili
+    //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili e così
     thumbnailsElements.forEach((thumb) => {
         thumb.classList.add('d-none');
         switch (currentPage) {
             case 1:
-                for (let i = startIndex; i <= endIndex; i++) {
+                for (let i = firstGroup; i <= endIndex; i++) {
                     thumbnailsElements[i].classList.remove('d-none')
                 }
             case 2:
-                for (let i = startIndex + itemsPerPage; i <= endIndex +itemsPerPage; i++) {
+                for (let i = secondGroup; i <= secondGroup+endIndex; i++) {
                     thumbnailsElements[i].classList.remove('d-none')
                 }
             case 3:
-                for (let i = startIndex + itemsPerPage * 2; i <= endIndex +itemsPerPage * 2; i++) {
+                for (let i = thirdGroup; i <= thirdGroup+endIndex; i++) {
                     thumbnailsElements[i].classList.remove('d-none')
                 }
         }
         
     })
-
-    
 
 
 }
@@ -142,7 +140,6 @@ thumbnailsElements[currentIndexImage].classList.add('colored');
 
 //Assegno le variabili di inizio e fine per ogni pagina di thumbnails
 changeThumbnailsDisplayed(currentIndexImage);
-console.log(currentIndexImage)
 
 //!EVENT LISTENERS----------------------------------------------------------------------
 
@@ -162,5 +159,4 @@ thumbnailsElements.forEach((thumbnail, i) => {
     })
 });
 
-//se l'index è superiore a 4 devo mostrare le thumbnails da 5 a 9
-//Voglio mostrare 5 thumbnails alla volta, quindi devo fare in modo che se supero una certa soglia con le freccie vedo le 5 thumbnails a partire da i numeri 0, 5, 10, 15 quindi multipli di 5
+
