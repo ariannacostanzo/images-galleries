@@ -45,6 +45,48 @@ const createThumbnailsTemplate = () => {
 
 }
 
+const changeThumbnailsDisplayed = (index) => {
+    let currentPage = 1;
+    const itemsPerPage = 5;
+    const startIndex = 0;
+    const endIndex = 4;
+    // const startNewPage = startIndex + itemsPerPage;
+    // const endNewPage = endIndex +itemsPerPage
+
+    //se current index image è tra 0 e 4 current page è 1
+    if (index >= startIndex && index <= endIndex) {
+        currentPage = 1;
+    }   else if (index <= 9 && index >= 5) {
+        currentPage = 2;
+    }   else if (index >= 10 && index <= 14) {
+        currentPage = 3;
+    }
+
+    //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili
+    thumbnailsElements.forEach((thumb) => {
+        thumb.classList.add('d-none');
+        switch (currentPage) {
+            case 1:
+                for (let i = startIndex; i <= endIndex; i++) {
+                    thumbnailsElements[i].classList.remove('d-none')
+                }
+            case 2:
+                for (let i = startIndex + itemsPerPage; i <= endIndex +itemsPerPage; i++) {
+                    thumbnailsElements[i].classList.remove('d-none')
+                }
+            case 3:
+                for (let i = startIndex + itemsPerPage * 2; i <= endIndex +itemsPerPage * 2; i++) {
+                    thumbnailsElements[i].classList.remove('d-none')
+                }
+        }
+        
+    })
+
+    
+
+
+}
+
 const changeActivePic = (target, i) => {
 
     // rimuovo all'elemento che è visibile attualmente la classe
@@ -69,55 +111,10 @@ const changeActivePic = (target, i) => {
     imagesElements[currentIndexImage].classList.add('active');
     thumbnailsElements[currentIndexImage].classList.add('colored');
 
-    //gestisco il cambio thumbnails
-    //questa è la logica iniziale, devo renderla dinamica invece di ripeterla così
-    if (currentIndexImage >= 0 && currentIndexImage < 4) {
-        logSomething('prima tabella');
-        thumbnailsElements[0].classList.remove('d-none')
-        thumbnailsElements[1].classList.remove('d-none')
-        thumbnailsElements[2].classList.remove('d-none')
-        thumbnailsElements[3].classList.remove('d-none')
-        thumbnailsElements[4].classList.remove('d-none')
-        thumbnailsElements[5].classList.add('d-none')
-        thumbnailsElements[6].classList.add('d-none')
-        thumbnailsElements[7].classList.add('d-none')
-        thumbnailsElements[8].classList.add('d-none')
-        thumbnailsElements[9].classList.add('d-none')
-        thumbnailsElements[10].classList.add('d-none')
-        thumbnailsElements[11].classList.add('d-none')
-        thumbnailsElements[12].classList.add('d-none')
-    } else if (currentIndexImage < 9 && currentIndexImage > 4){ 
-        logSomething('seconda tabella');
-        thumbnailsElements[0].classList.add('d-none')
-        thumbnailsElements[1].classList.add('d-none')
-        thumbnailsElements[2].classList.add('d-none')
-        thumbnailsElements[3].classList.add('d-none')
-        thumbnailsElements[4].classList.add('d-none')
-        thumbnailsElements[5].classList.remove('d-none')
-        thumbnailsElements[6].classList.remove('d-none')
-        thumbnailsElements[7].classList.remove('d-none')
-        thumbnailsElements[8].classList.remove('d-none')
-        thumbnailsElements[9].classList.remove('d-none')
-        thumbnailsElements[10].classList.add('d-none')
-        thumbnailsElements[11].classList.add('d-none')
-        thumbnailsElements[12].classList.add('d-none')
-        
-    }   else if (currentIndexImage > 9 && currentIndexImage < 14) {
-        logSomething('terza tabella');
-        thumbnailsElements[0].classList.add('d-none')
-        thumbnailsElements[1].classList.add('d-none')
-        thumbnailsElements[2].classList.add('d-none')
-        thumbnailsElements[3].classList.add('d-none')
-        thumbnailsElements[4].classList.add('d-none')
-        thumbnailsElements[5].classList.add('d-none')
-        thumbnailsElements[6].classList.add('d-none')
-        thumbnailsElements[7].classList.add('d-none')
-        thumbnailsElements[8].classList.add('d-none')
-        thumbnailsElements[9].classList.add('d-none')
-        thumbnailsElements[10].classList.remove('d-none')
-        thumbnailsElements[11].classList.remove('d-none')
-        thumbnailsElements[12].classList.remove('d-none')
-    }
+    changeThumbnailsDisplayed(currentIndexImage)
+    
+
+
 
 }
 
@@ -144,10 +141,8 @@ imagesElements[currentIndexImage].classList.add('active');
 thumbnailsElements[currentIndexImage].classList.add('colored');
 
 //Assegno le variabili di inizio e fine per ogni pagina di thumbnails
-// let currentPage = 1;
-// const itemsPerPage = 5;
-// const startIndex = (page - 1) * itemsPerPage;
-// const endIndex = startIndex + itemsPerPage;
+changeThumbnailsDisplayed(currentIndexImage);
+console.log(currentIndexImage)
 
 //!EVENT LISTENERS----------------------------------------------------------------------
 

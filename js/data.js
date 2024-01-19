@@ -51,6 +51,14 @@ const videogames = [
         name: "The Witcher 3",
         image: "the-witcher.jpg"
     },
+    {
+        name: "The Binding of Isaac",
+        image: "bof.webp"
+    },
+    {
+        name: "Borderlands",
+        image: "borderlands.jpg"
+    },
     
     
     
