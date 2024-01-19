@@ -8,6 +8,10 @@ body {
     background-color: rgba(0, 0, 0, 0.925);
 }
 
+.d-none {
+    display: none;
+}
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -84,6 +88,3 @@ figcaption {
     filter: grayscale(0);
 }
 
-.slide {
-    transform: translateX(-880px);
-}
