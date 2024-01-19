@@ -116,6 +116,10 @@ const changeActivePic = (target, i) => {
 
 }
 
+const createInterval = () => {
+    
+}
+
 
 //! INIZIO DELLA PAGINA ----------------------------------------------------------------------
 
@@ -141,21 +145,40 @@ thumbnailsElements[currentIndexImage].classList.add('colored');
 //Assegno le variabili di inizio e fine per ogni pagina di thumbnails
 changeThumbnailsDisplayed(currentIndexImage);
 
+//setto l'autoplay
+let autoplay = setInterval( () => {
+    changeActivePic('next')
+},3000)
+
 //!EVENT LISTENERS----------------------------------------------------------------------
 
 rightButton.addEventListener('click', () => {
-    changeActivePic('next')
+    changeActivePic('next');
+    clearInterval(autoplay);
+    autoplay = setInterval( () => {
+        changeActivePic('next')
+    },3000)
+    
 })
 
 leftButton.addEventListener('click', () => {
     changeActivePic('previous')
-
+    clearInterval(autoplay);
+    autoplay = setInterval( () => {
+        changeActivePic('next')
+    },3000)
+    
 });
 
 thumbnailsElements.forEach((thumbnail, i) => {
 
     thumbnail.addEventListener('click', () => {
-        changeActivePic(i)
+        changeActivePic(i);
+        clearInterval(autoplay);
+        autoplay = setInterval( () => {
+            changeActivePic('next')
+        },3000)
+        
     })
 });
 
