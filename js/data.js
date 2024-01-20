@@ -63,3 +63,67 @@ const videogames = [
     
     
 ]
+
+const tvshows = [
+    {
+        name: 'Spartacus',
+        image: 'spartacus.jpg',
+    },
+    {
+        name: 'Lost',
+        image: 'lost.jpg',
+    },
+    {
+        name: 'Vikings',
+        image: 'vikings.jpg',
+    },
+    {
+        name: 'The Boys',
+        image: 'theboyz.jpg',
+    },
+    {
+        name: 'The Witcher',
+        image: 'tvthe-witcher.jpg',
+    },
+    {
+        name: 'The Umbrella Academy',
+        image: 'tua.jpg',
+    },
+    {
+        name: 'Misfits',
+        image: 'misfits.jpg',
+    },
+    {
+        name: 'Chilling Adventures of Sabrina',
+        image: 'sabrina.jpg',
+    },
+    {
+        name: 'The 100',
+        image: 'the100.jpg',
+    },
+    {
+        name: 'Game of Thrones',
+        image: 'got.jpg',
+    },
+    {
+        name: 'How to get away with murder',
+        image: 'htgawm.jpg',
+    },
+    {
+        name: 'Westworld',
+        image: 'westworld.jpg',
+    },
+    {
+        name: 'Peaky Blinders',
+        image: 'peaky-blinders.jpg',
+    },
+    {
+        name: 'Xena la principessa guerriera',
+        image: 'xena.jpg',
+    },
+    {
+        name: 'Buffy the vampire slayer',
+        image: 'buffy.jpg',
+    },
+]
+
