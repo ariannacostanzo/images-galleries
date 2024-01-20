@@ -1,3 +1,4 @@
+//Raccolgo gli elementi che mi servono dalla pagina
 const imageContainer = document.getElementById('image-container');
 const leftButton = document.getElementById('left-arrow');
 const rightButton = document.getElementById('right-arrow');
@@ -8,7 +9,9 @@ const tvshowsButton = document.getElementById('tv-shows');
 
 //! Funzioni ---------------------------------------------------------------
 
+
 const logSomething = (something) =>  console.log(something);
+
 
 /** Creates the template for the images to display
  * 
@@ -36,6 +39,7 @@ const createImageTemplate = (array) => {
 
 };
 
+
 /**Creates the template for the thumbnails to display
  * 
  * @param {array} array 
@@ -56,6 +60,7 @@ const createThumbnailsTemplate = (array) => {
     return thumbnails
 
 }
+
 
 /** Handle the set of 5 thumbnails displayed according to the current image index
  * 
@@ -79,8 +84,7 @@ const changeThumbnailsDisplayed = (index) => {
 
     //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili e così via
     thumbnailsElements.forEach((thumb) => {
-        
-        
+             
         thumb.classList.add('d-none');
         switch (currentPage) {
             case 1:
@@ -96,11 +100,9 @@ const changeThumbnailsDisplayed = (index) => {
                     thumbnailsElements[i].classList.remove('d-none');
                 }
         }
-        
     })
-
-
 }
+
 
 /** Handles the events of changing the current image
  * 
@@ -111,8 +113,8 @@ const changeActivePic = (target) => {
     // rimuovo all'elemento che è visibile attualmente la classe
     imagesElements[currentIndexImage].classList.remove('active');
     thumbnailsElements[currentIndexImage].classList.remove('colored');
-    //in base al caso aumento o diminuisco
-    
+
+    //in base al caso aumento, diminuisco o cambio l'index, cambiando l'immagine mostrata
     switch (target) {
         case "next":
             if (currentIndexImage === imagesElements.length - 1) currentIndexImage = -1 
@@ -131,8 +133,6 @@ const changeActivePic = (target) => {
     thumbnailsElements[currentIndexImage].classList.add('colored');
 
     changeThumbnailsDisplayed(currentIndexImage)
-    
-
 
 }
 
@@ -142,14 +142,15 @@ const changeActivePic = (target) => {
  * @param {array} array 
  */
 const startApp = (array) => {
-    // risetto index a 0
+
+    // resetto index a 0
     currentIndexImage = 0;
 
     //svuoto i container
     imageContainer.innerHTML = ''
     thumbnailsContainer.innerHTML = ''
 
-    //appendo il template creato con la funzione alla pagina
+    //appendo il template di images al container
     imageContainer.innerHTML = createImageTemplate(array);
 
     //appendo il template di thumbnails al container
@@ -159,31 +160,34 @@ const startApp = (array) => {
     imagesElements = document.querySelectorAll('figure');
     thumbnailsElements = document.querySelectorAll('.thumbnails');
     
-    //Alla prima di queste do la classe active e colored in modo che possa vedersi
+    //Alle prime di queste do la classe active e colored in modo che possano vedersi
     imagesElements[currentIndexImage].classList.add('active');
     thumbnailsElements[currentIndexImage].classList.add('colored');
-
-    
-    
    
 }
+
 
 /** Resets autoplay
  * 
  */
 const resetAutoplay = () => {
+
+    //Sgombro l'autoplay e lo faccio ripartire da capo
     clearInterval(autoplay);
     autoplay = setInterval( () => {
         changeActivePic('next')
     },3000)
+
 }
+
 
 /** Handles the on thumbnail click event
  * 
  */
 const onThumbnailsClick = () => {
-    thumbnailsElements.forEach((thumbnail, i) => {
 
+    thumbnailsElements.forEach((thumbnail, i) => {
+        //assegno ad ogni thumbnail la possibilità di cambiare immagine cliccando
         thumbnail.addEventListener('click', () => {
             changeActivePic(i);
             resetAutoplay()
@@ -194,37 +198,46 @@ const onThumbnailsClick = () => {
 
 //! INIZIO DELLA PAGINA ----------------------------------------------------------------------
 
-//inizializzo la mia variabile d'appoggio
+//inizializzo le variabili che mi servono
 let currentIndexImage = 0;
 let imagesElements;
 let thumbnailsElements;
 let autoplay;
 
+//Faccio iniziare l'app per la prima volta
 startApp(videogames);
+
+//Setto il set da 5 thumbnails da mostrare
 changeThumbnailsDisplayed(currentIndexImage);
 
+//Inizializzo l'autoplay
 autoplay = setInterval( () => {
     changeActivePic('next')
 },3000)
 
+//Inizializzo il click ad ogni thumbnail
 onThumbnailsClick();
     
 
 //!EVENT LISTENERS----------------------------------------------------------------------
 
+//quando premo la freccietta destra si mostra la prossima immagine e si resetta l'autoplay
 rightButton.addEventListener('click', () => {
+
     changeActivePic('next');
     resetAutoplay();
     
 })
 
+//quando premo la freccietta sinistra si mostra l'immagine precedente e si resetta l'autoplay
 leftButton.addEventListener('click', () => {
+
     changeActivePic('previous')
     resetAutoplay()
     
 });
 
-
+//quando clicco sull'header videogame mostro le immagini di videogiochi con tutta la logica creata
 videogamesButton.addEventListener('click', () => {
     
     startApp(videogames);
@@ -233,13 +246,11 @@ videogamesButton.addEventListener('click', () => {
     
 })
 
+//quando clicco sull'header videogame mostro le immagini di serie tv con tutta la logica creata
 tvshowsButton.addEventListener('click', () => {
     
     startApp(tvshows)
     resetAutoplay();
-    onThumbnailsClick();
-    
-    
-    
+    onThumbnailsClick();  
     
 })
