@@ -5,7 +5,7 @@ const rightButton = document.getElementById('right-arrow');
 const thumbnailsContainer = document.querySelector('.thumbnails-container');
 const videogamesButton = document.getElementById('videogames');
 const tvshowsButton = document.getElementById('tv-shows');
-
+const title = document.querySelector('h1')
 
 //! Funzioni ---------------------------------------------------------------
 
@@ -240,6 +240,7 @@ leftButton.addEventListener('click', () => {
 //quando clicco sull'header videogame mostro le immagini di videogiochi con tutta la logica creata
 videogamesButton.addEventListener('click', () => {
     
+    title.innerText = 'I miei videogiochi preferiti:'
     startApp(videogames);
     resetAutoplay();
     onThumbnailsClick();
@@ -249,6 +250,7 @@ videogamesButton.addEventListener('click', () => {
 //quando clicco sull'header videogame mostro le immagini di serie tv con tutta la logica creata
 tvshowsButton.addEventListener('click', () => {
     
+    title.innerText = 'Le mie serie tv preferite:'
     startApp(tvshows)
     resetAutoplay();
     onThumbnailsClick();  
