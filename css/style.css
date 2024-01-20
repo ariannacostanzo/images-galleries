@@ -12,6 +12,26 @@ body {
     display: none;
 }
 
+header {
+    display: flex;
+    height: 60px;
+    background-color: white;
+    box-shadow: 0 0 5px black;
+    line-height: 60px;
+    justify-content: space-around;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 3px black;
+}
+
+header p {
+    cursor: pointer;
+}
+
+header p:hover {
+    color: rgb(41, 133, 120);
+}
+
 h1 {
    padding: 1rem;
    text-shadow: 0 0 3px black;
@@ -23,7 +43,7 @@ h1 {
     align-items: center;
     justify-content: center;
     justify-content: center;
-    margin-top: 5rem;
+    margin-top: 2rem;
     gap: 30px;
 }
 
@@ -49,7 +69,7 @@ figcaption {
 }
 
 .img-fluid {
-    max-width: 880px;
+    width: 880px;
     border-radius: 10px;
     object-fit: cover;
     height: 500px;
@@ -84,7 +104,7 @@ figcaption {
 }
 
 .thumbnails {
-    flex-basis: calc(100% / 5);
+    width: 168px;
     height: 95px;
     border-radius: 10px;
     filter: grayscale(1);

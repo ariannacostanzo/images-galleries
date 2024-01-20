@@ -2,18 +2,25 @@ const imageContainer = document.getElementById('image-container');
 const leftButton = document.getElementById('left-arrow');
 const rightButton = document.getElementById('right-arrow');
 const thumbnailsContainer = document.querySelector('.thumbnails-container');
+const videogamesButton = document.getElementById('videogames');
+const tvshowsButton = document.getElementById('tv-shows');
 
 
 //! Funzioni ---------------------------------------------------------------
 
 const logSomething = (something) =>  console.log(something);
 
-const createImageTemplate = () => {
+/** Creates the template for the images to display
+ * 
+ * @param {array} array 
+ * @returns template of images 
+ */
+const createImageTemplate = (array) => {
 
     //creo il template con un reduce
-    const gamesElements = videogames.reduce((result, videogame, i) => {
+    const images = array.reduce((result, element, i) => {
 
-        const {name, image} = videogame;
+        const {name, image} = element;
         
         return result + `
         <figure  id="image-${i}">
@@ -25,16 +32,21 @@ const createImageTemplate = () => {
 
     }, '');
 
-    return gamesElements
+    return images
 
 };
 
-const createThumbnailsTemplate = () => {
+/**Creates the template for the thumbnails to display
+ * 
+ * @param {array} array 
+ * @returns template of thumbnails
+ */
+const createThumbnailsTemplate = (array) => {
     //creo il template con un reduce
 
-    const thumbnails= videogames.reduce((result, videogame) => {
+    const thumbnails= array.reduce((result, element) => {
 
-        const {name, image} = videogame;
+        const {name, image} = element;
         
         return result + `
         <img src="/images/${image}" alt="${name}" class="thumbnails">`
@@ -45,7 +57,10 @@ const createThumbnailsTemplate = () => {
 
 }
 
-// con questa funzione in base al currentIndexImage cambio la pagina di thumbnails mostrata
+/** Handle the set of 5 thumbnails displayed according to the current image index
+ * 
+ * @param {number} index 
+ */
 const changeThumbnailsDisplayed = (index) => {
     let currentPage = 1;
     const endIndex = 4;
@@ -62,21 +77,23 @@ const changeThumbnailsDisplayed = (index) => {
         currentPage = 3;
     }
 
-    //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili e così
+    //rendo tutte hidden, se la pagina è uno tutte le thumb da 0 a 4 sono visibili e così via
     thumbnailsElements.forEach((thumb) => {
+        
+        
         thumb.classList.add('d-none');
         switch (currentPage) {
             case 1:
                 for (let i = firstGroup; i <= endIndex; i++) {
-                    thumbnailsElements[i].classList.remove('d-none')
+                    thumbnailsElements[i].classList.remove('d-none');
                 }
             case 2:
                 for (let i = secondGroup; i <= secondGroup+endIndex; i++) {
-                    thumbnailsElements[i].classList.remove('d-none')
+                    thumbnailsElements[i].classList.remove('d-none');
                 }
             case 3:
                 for (let i = thirdGroup; i <= thirdGroup+endIndex; i++) {
-                    thumbnailsElements[i].classList.remove('d-none')
+                    thumbnailsElements[i].classList.remove('d-none');
                 }
         }
         
@@ -85,7 +102,11 @@ const changeThumbnailsDisplayed = (index) => {
 
 }
 
-const changeActivePic = (target, i) => {
+/** Handles the events of changing the current image
+ * 
+ * @param {*} target 
+ */
+const changeActivePic = (target) => {
 
     // rimuovo all'elemento che è visibile attualmente la classe
     imagesElements[currentIndexImage].classList.remove('active');
@@ -113,73 +134,112 @@ const changeActivePic = (target, i) => {
     
 
 
-
 }
 
-const createInterval = () => {
+
+/** Sets the beginning of the logic, also when changing the array of chosen images
+ * 
+ * @param {array} array 
+ */
+const startApp = (array) => {
+    // risetto index a 0
+    currentIndexImage = 0;
+
+    //svuoto i container
+    imageContainer.innerHTML = ''
+    thumbnailsContainer.innerHTML = ''
+
+    //appendo il template creato con la funzione alla pagina
+    imageContainer.innerHTML = createImageTemplate(array);
+
+    //appendo il template di thumbnails al container
+    thumbnailsContainer.innerHTML = createThumbnailsTemplate(array);
+
+    //Ora raccolgo tutte le figures e thumbnails create
+    imagesElements = document.querySelectorAll('figure');
+    thumbnailsElements = document.querySelectorAll('.thumbnails');
     
+    //Alla prima di queste do la classe active e colored in modo che possa vedersi
+    imagesElements[currentIndexImage].classList.add('active');
+    thumbnailsElements[currentIndexImage].classList.add('colored');
+
+    
+    
+   
 }
 
+/** Resets autoplay
+ * 
+ */
+const resetAutoplay = () => {
+    clearInterval(autoplay);
+    autoplay = setInterval( () => {
+        changeActivePic('next')
+    },3000)
+}
+
+/** Handles the on thumbnail click event
+ * 
+ */
+const onThumbnailsClick = () => {
+    thumbnailsElements.forEach((thumbnail, i) => {
+
+        thumbnail.addEventListener('click', () => {
+            changeActivePic(i);
+            resetAutoplay()
+            
+        })
+    });
+}
 
 //! INIZIO DELLA PAGINA ----------------------------------------------------------------------
 
-
-//appendo il template creato con la funzione alla pagina
-imageContainer.innerHTML = createImageTemplate();
-
-//appendo il template di thumbnails al container
-thumbnailsContainer.innerHTML = createThumbnailsTemplate();
-
-
-//Ora raccolgo tutte le figures e thumbnails create
-const imagesElements = document.querySelectorAll('figure');
-const thumbnailsElements = document.querySelectorAll('.thumbnails');
-
-//Inizializzo una variabile d'appoggio
+//inizializzo la mia variabile d'appoggio
 let currentIndexImage = 0;
+let imagesElements;
+let thumbnailsElements;
+let autoplay;
 
-//Alla prima di queste do la classe active e colored in modo che possa vedersi
-imagesElements[currentIndexImage].classList.add('active');
-thumbnailsElements[currentIndexImage].classList.add('colored');
-
-//Assegno le variabili di inizio e fine per ogni pagina di thumbnails
+startApp(videogames);
 changeThumbnailsDisplayed(currentIndexImage);
 
-//setto l'autoplay
-let autoplay = setInterval( () => {
+autoplay = setInterval( () => {
     changeActivePic('next')
 },3000)
+
+onThumbnailsClick();
+    
 
 //!EVENT LISTENERS----------------------------------------------------------------------
 
 rightButton.addEventListener('click', () => {
     changeActivePic('next');
-    clearInterval(autoplay);
-    autoplay = setInterval( () => {
-        changeActivePic('next')
-    },3000)
+    resetAutoplay();
     
 })
 
 leftButton.addEventListener('click', () => {
     changeActivePic('previous')
-    clearInterval(autoplay);
-    autoplay = setInterval( () => {
-        changeActivePic('next')
-    },3000)
+    resetAutoplay()
     
 });
 
-thumbnailsElements.forEach((thumbnail, i) => {
 
-    thumbnail.addEventListener('click', () => {
-        changeActivePic(i);
-        clearInterval(autoplay);
-        autoplay = setInterval( () => {
-            changeActivePic('next')
-        },3000)
-        
-    })
-});
+videogamesButton.addEventListener('click', () => {
+    
+    startApp(videogames);
+    resetAutoplay();
+    onThumbnailsClick();
+    
+})
 
-
+tvshowsButton.addEventListener('click', () => {
+    
+    startApp(tvshows)
+    resetAutoplay();
+    onThumbnailsClick();
+    
+    
+    
+    
+})
